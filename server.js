@@ -1,7 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
-const port=process.env.PORT||3000;
+const port = process.env.PORT || 3000;
 
 var app = express();
 app.set('view engine', 'hbs');
@@ -17,8 +17,8 @@ app.use((req, res, next) => {
     var now = new Date().toDateString();
     var log = `${now}:${req.method}${req.url}`;
     console.log(log);
-    fs.appendFile('server.log',log+'\n',(err)=>{
-        if(err){
+    fs.appendFile('server.log', log + '\n', (err) => {
+        if (err) {
             console.log('unable to write');
         }
     });
@@ -44,6 +44,12 @@ app.get('/about', (req, res) => {
     res.render('about.hbs', {
         pageTitle: 'About',
         pageDescription: 'This is About Page'
+    });
+});
+app.get('/project', (req, res) => {
+    res.render('project.hbs', {
+        pageTitle: 'Project Page',
+        pageDescription: 'This is project page'
     });
 });
 app.get('/bad', (req, res) => {
